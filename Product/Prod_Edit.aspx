@@ -28,15 +28,10 @@
     <link href="../js/fancybox/helpers/jquery.fancybox-buttons.css" rel="stylesheet"
         type="text/css" />
     <%-- fancybox helpers End --%>
-    <%-- tooltip Start --%>
-    <link href="../js/tooltip/tip-darkgray/tip-darkgray.css" rel="stylesheet" type="text/css" />
-    <script src="../js/tooltip/jquery.poshytip.min.js" type="text/javascript"></script>
-    <%-- tooltip End --%>
     <%-- blockUI Start --%>
     <script src="../js/blockUI/jquery.blockUI.js" type="text/javascript"></script>
     <script src="../js/ValidCheckPass.js" type="text/javascript"></script>
     <%-- blockUI End --%>
-    <script src="../js/public.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             //fancybox - 圖片顯示
@@ -202,9 +197,6 @@
             }
         }
 
-        function goList() {
-            location.href = '<%=Session["BackListUrl"] %>';
-        }
     </script>
     <script type="text/javascript">
         //----- 動態欄位 Start -----
@@ -267,6 +259,7 @@
         }
         //----- 動態欄位 End -----
     </script>
+
 </head>
 <body class="MainArea">
     <form id="form1" runat="server">
@@ -372,8 +365,8 @@
                     <td class="TableModifyTdHead BgBlue">子件型號
                     </td>
                     <td class="TableModifyTd">
-                        <asp:TextBox ID="tb_Part_No" runat="server" MaxLength="40" Width="200px" CssClass="tooltip input02"
-                            ToolTip="輸入品號關鍵字"></asp:TextBox>
+                        <asp:TextBox ID="tb_Part_No" runat="server" MaxLength="40" Width="200px" CssClass="input02"
+                            placeholder="輸入品號關鍵字"></asp:TextBox>
                         <img id="rev_Part_No" src="../images/delete.png" onclick="clear_Field('Part_No');"
                             title="清除" alt="清除" style="display: none; cursor: pointer;" />
                         <asp:TextBox ID="val_Part_No" runat="server" Style="display: none"></asp:TextBox>
@@ -388,22 +381,24 @@
                                 <td align="right" width="50px" class="styleGraylight">(繁中)
                                 </td>
                                 <td>
-                                    <asp:Literal ID="lt_Model_Name_zh_TW" runat="server"></asp:Literal>
+                                    <asp:TextBox ID="tb_Model_Name_zh_TW" runat="server" CssClass="input02" Width="95%"
+                                        MaxLength="250"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td align="right" class="styleGraylight">(簡中)
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="tb_Model_Name_zh_CN" runat="server" CssClass="input02" Width="500px"
-                                        MaxLength="120"></asp:TextBox>
+                                    <asp:TextBox ID="tb_Model_Name_zh_CN" runat="server" CssClass="input02" Width="95%"
+                                        MaxLength="250"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td align="right" class="styleGraylight">(英文)
                                 </td>
                                 <td>
-                                    <asp:Literal ID="lt_Model_Name_en_US" runat="server"></asp:Literal>
+                                    <asp:TextBox ID="tb_Model_Name_en_US" runat="server" CssClass="input02" Width="95%"
+                                        MaxLength="250"></asp:TextBox>
                                 </td>
                             </tr>
                         </table>
@@ -435,21 +430,21 @@
                     <td class="TableModifyTd">
                         <table cellpadding="3" border="0" width="98%">
                             <tr>
-                                <td align="right" width="50px" class="styleGraylight">(TW)
+                                <td align="center" width="70px" class="styleGraylight">(TW)
                                 </td>
                                 <td>
                                     <asp:Literal ID="lt_Substitute_Model_No_TW" runat="server"></asp:Literal>
                                 </td>
                             </tr>
                             <tr>
-                                <td align="right" class="styleGraylight">(SH)
+                                <td align="center" class="styleGraylight">(SH)
                                 </td>
                                 <td>
                                     <asp:Literal ID="lt_Substitute_Model_No_SH" runat="server"></asp:Literal>
                                 </td>
                             </tr>
                             <tr>
-                                <td align="right" class="styleGraylight">(SZ)
+                                <td align="center" class="styleGraylight">(SZ)
                                 </td>
                                 <td>
                                     <asp:Literal ID="lt_Substitute_Model_No_SZ" runat="server"></asp:Literal>
@@ -491,8 +486,8 @@
                     </td>
                     <td class="TableModifyTd">
                         <asp:RadioButtonList ID="rbl_Pub_Logo" runat="server" RepeatLayout="Flow" RepeatDirection="Horizontal">
-                            <asp:ListItem Value="1">PK Logo</asp:ListItem>
-                            <asp:ListItem Value="2">無Logo</asp:ListItem>
+                            <asp:ListItem Value="1">PK Logo&nbsp;</asp:ListItem>
+                            <asp:ListItem Value="2">無Logo&nbsp;</asp:ListItem>
                             <asp:ListItem Value="3">客戶Logo</asp:ListItem>
                         </asp:RadioButtonList>
                         <br />
@@ -505,7 +500,7 @@
                     <td class="TableModifyTd">
                         <asp:RadioButtonList ID="rbl_Pub_Accessories" runat="server" RepeatDirection="Horizontal"
                             RepeatLayout="Flow">
-                            <asp:ListItem Value="1">主件</asp:ListItem>
+                            <asp:ListItem Value="1">主件&nbsp;</asp:ListItem>
                             <asp:ListItem Value="2">配件</asp:ListItem>
                         </asp:RadioButtonList>
                     </td>
@@ -529,8 +524,8 @@
                     <td class="TableModifyTdHead BgBlue">選購配件型號
                     </td>
                     <td class="TableModifyTd">
-                        <asp:TextBox ID="tb_Select_ModelNo" runat="server" MaxLength="40" Width="200px" CssClass="tooltip input02"
-                            ToolTip="輸入品號關鍵字"></asp:TextBox>
+                        <asp:TextBox ID="tb_Select_ModelNo" runat="server" MaxLength="40" Width="200px" CssClass="input02"
+                            placeholder="輸入品號關鍵字"></asp:TextBox>
                         <asp:TextBox ID="tb_Select_Item_Val" runat="server" ToolTip="欄位值集合" Style="display: none;"></asp:TextBox>
                         <!-- 動態欄位顯示 -->
                         <div>
@@ -543,7 +538,7 @@
                     </td>
                     <td class="TableModifyTd">
                         <asp:TextBox ID="tb_Compare_ModelNo" runat="server" MaxLength="40" Width="200px"
-                            CssClass="tooltip input02" ToolTip="輸入品號關鍵字"></asp:TextBox>
+                            CssClass="input02" placeholder="輸入品號關鍵字"></asp:TextBox>
                         <asp:TextBox ID="tb_Compare_Item_Val" runat="server" ToolTip="欄位值集合" Style="display: none;"></asp:TextBox>
                         <!-- 動態欄位顯示 -->
                         <div>
@@ -553,7 +548,13 @@
                         </div>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="4" class="SubmitAreaS" style="text-align: center;">
+                        <button type="button" class="btnBlock colorGreen" onclick="triggerSave();" style="width: 90px;">存 檔</button>
+                    </td>
+                </tr>
             </tbody>
+
             <!-- 基本資料 End -->
             <!-- 共用欄位 Start -->
             <!-- // 產品單一裸重 Start // -->
@@ -624,6 +625,12 @@
                     <td class="TableModifyTd" colspan="3">
                         <asp:TextBox ID="tb_Pub_PW_Other" runat="server" CssClass="input02" Width="98%" Rows="5"
                             MaxLength="500" TextMode="MultiLine"></asp:TextBox>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="4" class="SubmitAreaS" style="text-align: center;">
+                        <button type="button" class="btnBlock colorGreen" onclick="triggerSave();" style="width: 90px;">存 檔</button>
                     </td>
                 </tr>
             </tbody>
@@ -713,6 +720,12 @@
                         <asp:Literal ID="lt_Photo_Packing" runat="server"></asp:Literal>
                     </td>
                 </tr>
+
+                <tr>
+                    <td colspan="4" class="SubmitAreaS" style="text-align: center;">
+                        <button type="button" class="btnBlock colorGreen" onclick="triggerSave();" style="width: 90px;">存 檔</button>
+                    </td>
+                </tr>
             </tbody>
             <!-- // 包裝 End // -->
             <!-- // 內箱 Start // -->
@@ -796,6 +809,12 @@
                     </td>
                     <td class="TableModifyTd">
                         <asp:Literal ID="lt_Pub_IB_CUFT" runat="server"></asp:Literal>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="4" class="SubmitAreaS" style="text-align: center;">
+                        <button type="button" class="btnBlock colorGreen" onclick="triggerSave();" style="width: 90px;">存 檔</button>
                     </td>
                 </tr>
             </tbody>
@@ -960,7 +979,7 @@
                         <asp:Literal ID="lt_Pub_Notes" runat="server"></asp:Literal>
                     </td>
                 </tr>
-               <%-- 
+                <%-- 
                    ** Remove at 2017-11-02, by Kelly **
 
                    <tr>
@@ -1004,7 +1023,6 @@
                 </tr>
             </tbody>
             <!-- // 其他 End // -->
-            <!-- 共用欄位 End -->
         </table>
         <div id="view" style="left: 0px; top: 0px; width: 100%; height: px; overflow: auto;">
             <table class="TableModify">
@@ -1130,9 +1148,10 @@
                 <!-- // 認證資料 End // -->
             </table>
         </div>
+
+        <!-- // 規格符號 Start // -->
         <div>
             <table class="TableModify">
-                <!-- // 規格符號 Start // -->
                 <tr class="ModifyHead DTtoggle" rel="#dt7" imgrel="#img7" title="收合" style="cursor: pointer">
                     <td>
                         <img src="../images/icon_down.png" id="img7" />
@@ -1172,10 +1191,16 @@
                             </asp:ListView>
                         </td>
                     </tr>
+
+                    <tr>
+                        <td colspan="4" class="SubmitAreaS" style="text-align: center;">
+                            <button type="button" class="btnBlock colorGreen" onclick="triggerSave();" style="width: 90px;">存 檔</button>
+                        </td>
+                    </tr>
                 </tbody>
-                <!-- // 規格符號 End // -->
             </table>
         </div>
+        <!-- // 規格符號 End // -->
         <div>
             <table class="TableModify">
                 <!-- 維護資訊 Start -->
@@ -1187,7 +1212,7 @@
                     <td class="TableModifyTdHead" style="width: 100px">維護資訊
                     </td>
                     <td class="TableModifyTd" colspan="3">
-                        <table cellpadding="3" border="0">
+                        <table class="table">
                             <tr>
                                 <td align="right" width="100px">建立者：
                                 </td>
@@ -1221,14 +1246,21 @@
         <div class="SubmitArea">
             <asp:Button ID="btn_Save" runat="server" Text="存 檔" ValidationGroup="Add" OnClick="btn_Save_Click"
                 OnClientClick="Get_Item('tb_Use_Item_Val','ul_UseList');Get_Item('tb_Select_Item_Val','ul_SelectList');Get_Item('tb_Compare_Item_Val','ul_CompareList');"
-                Width="90px" CssClass="btnBlock colorBlue" />
-            <input onclick="goList();" type="button" value="返回列表" style="width: 90px" class="btnBlock colorGray" />
+                Width="90px" CssClass="btnBlock colorBlue" style="display:none;" />
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" ShowSummary="false"
                 ShowMessageBox="true" ValidationGroup="Add" />
+
+            <a href="<%=Session["BackListUrl"] %>" class="btnBlock colorGray">返回產品列表</a>
         </div>
         <!-- Scroll Bar Icon -->
         <ucIcon:Ascx_ScrollIcon ID="Ascx_ScrollIcon1" runat="server" ShowSave="N" ShowList="Y"
             ShowTop="Y" ShowBottom="Y" />
+
+        <script>
+            function triggerSave() {
+                $("#btn_Save").trigger("click");
+            }
+        </script>
     </form>
 </body>
 </html>
