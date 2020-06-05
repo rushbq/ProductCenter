@@ -181,7 +181,29 @@
                     <td class="TableModifyTdHead">規格
                     </td>
                     <td class="TableModifyTd" colspan="3">
-                        <asp:Literal ID="lt_Model_Desc" runat="server"></asp:Literal>
+                        <table cellpadding="3" border="0" width="98%">
+                            <tr>
+                                <td align="right" width="50px" class="styleGraylight">(繁中)
+                                </td>
+                                <td>
+                                    <asp:Literal ID="lt_Model_Desc" runat="server"></asp:Literal>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" class="styleGraylight">(簡中)
+                                </td>
+                                <td>
+                                    <asp:Literal ID="lt_Model_Desc_zh_CN" runat="server"></asp:Literal>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" class="styleGraylight">(英文)
+                                </td>
+                                <td>
+                                    <asp:Literal ID="lt_Model_Desc_en_US" runat="server"></asp:Literal>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
                 <tr>

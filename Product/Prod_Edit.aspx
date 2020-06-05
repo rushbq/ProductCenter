@@ -408,7 +408,29 @@
                     <td class="TableModifyTdHead">規格
                     </td>
                     <td class="TableModifyTd" colspan="3">
-                        <asp:Literal ID="lt_Model_Desc" runat="server"></asp:Literal>
+                        <table cellpadding="3" border="0" width="98%">
+                            <tr>
+                                <td align="right" width="50px" class="styleGraylight">(繁中)
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="tb_Model_Desc" runat="server" Width="95%" MaxLength="250" ReadOnly="true" Enabled="false"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" class="styleGraylight">(簡中)
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="tb_Model_Desc_zh_CN" runat="server" Width="95%" MaxLength="250" ReadOnly="true" Enabled="false"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" class="styleGraylight">(英文)
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="tb_Model_Desc_en_US" runat="server" CssClass="input02" Width="95%" MaxLength="250"></asp:TextBox>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
                 <tr>
@@ -1246,7 +1268,7 @@
         <div class="SubmitArea">
             <asp:Button ID="btn_Save" runat="server" Text="存 檔" ValidationGroup="Add" OnClick="btn_Save_Click"
                 OnClientClick="Get_Item('tb_Use_Item_Val','ul_UseList');Get_Item('tb_Select_Item_Val','ul_SelectList');Get_Item('tb_Compare_Item_Val','ul_CompareList');"
-                Width="90px" CssClass="btnBlock colorBlue" style="display:none;" />
+                Width="90px" CssClass="btnBlock colorBlue" Style="display: none;" />
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" ShowSummary="false"
                 ShowMessageBox="true" ValidationGroup="Add" />
 
@@ -1257,6 +1279,7 @@
             ShowTop="Y" ShowBottom="Y" />
 
         <script>
+            /* 觸發Save */
             function triggerSave() {
                 $("#btn_Save").trigger("click");
             }

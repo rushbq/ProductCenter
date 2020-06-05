@@ -94,7 +94,8 @@ public partial class Prod_View : SecurityIn
                 SBSql.AppendLine(" , (SELECT Account_Name + ' (' + Display_Name + ')' FROM PKSYS.dbo.User_Profile WHERE (Account_Name = Main.Update_Who)) AS Update_Name ");
                 //共同欄位
                 SBSql.AppendLine(" , DBS, Main.Model_No, Main.Item_No, SpecClassID ");
-                SBSql.AppendLine(" , Main.Model_Name_zh_TW, Main.Model_Name_zh_CN, Main.Model_Name_en_US, Main.Model_Desc ");
+                SBSql.AppendLine(" , Main.Model_Name_zh_TW, Main.Model_Name_zh_CN, Main.Model_Name_en_US");
+                SBSql.AppendLine(" , Main.Model_Desc, Main.Model_Desc_zh_CN, Main.Model_Desc_en_US");
                 SBSql.AppendLine(" , Substitute_Model_No_TW, Substitute_Model_No_SH, Main.Substitute_Model_No_SZ ");
                 SBSql.AppendLine(" , Cases_Of_Failure_Date_TW, Cases_Of_Failure_Date_SH, Main.Cases_Of_Failure_Date_SZ ");
                 SBSql.AppendLine(" , Pub_Patent_No, Pub_Standard1, Pub_Standard2, Pub_Standard3 ");
@@ -141,6 +142,8 @@ public partial class Prod_View : SecurityIn
                         this.lt_Model_Name_zh_CN.Text = DT.Rows[0]["Model_Name_zh_CN"].ToString();   //品名(簡中)
                         this.lt_Model_Name_en_US.Text = DT.Rows[0]["Model_Name_en_US"].ToString();   //品名(英文)
                         this.lt_Model_Desc.Text = DT.Rows[0]["Model_Desc"].ToString();       //規格
+                        this.lt_Model_Desc_zh_CN.Text = DT.Rows[0]["Model_Desc_zh_CN"].ToString();       //規格
+                        this.lt_Model_Desc_en_US.Text = DT.Rows[0]["Model_Desc_en_US"].ToString();       //規格
                         this.lt_BarCode.Text = DT.Rows[0]["BarCode"].ToString();       //條碼
                         this.lt_Catelog_Vol.Text = DT.Rows[0]["Catelog_Vol"].ToString();   //目錄
                         this.lt_Page.Text = DT.Rows[0]["Page"].ToString();   //頁次

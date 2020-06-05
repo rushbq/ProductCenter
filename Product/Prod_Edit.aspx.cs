@@ -194,7 +194,8 @@ public partial class Prod_Edit : SecurityIn
                 SBSql.AppendLine(" , (SELECT Account_Name + ' (' + Display_Name + ')' FROM PKSYS.dbo.User_Profile WHERE (Account_Name = Main.Update_Who)) AS Update_Name ");
                 //共同欄位
                 SBSql.AppendLine(" , DBS, Main.Model_No, Main.Item_No, SpecClassID ");
-                SBSql.AppendLine(" , Main.Model_Name_zh_TW, Main.Model_Name_zh_CN, Main.Model_Name_en_US, Main.Model_Desc ");
+                SBSql.AppendLine(" , Main.Model_Name_zh_TW, Main.Model_Name_zh_CN, Main.Model_Name_en_US ");
+                SBSql.AppendLine(" , Main.Model_Desc, Main.Model_Desc_zh_CN, Main.Model_Desc_en_US");
                 SBSql.AppendLine(" , Substitute_Model_No_TW, Substitute_Model_No_SH, Main.Substitute_Model_No_SZ ");
                 SBSql.AppendLine(" , Cases_Of_Failure_Date_TW, Cases_Of_Failure_Date_SH, Main.Cases_Of_Failure_Date_SZ ");
                 SBSql.AppendLine(" , Pub_Patent_No, Pub_Standard1, Pub_Standard2, Pub_Standard3 ");
@@ -243,7 +244,9 @@ public partial class Prod_Edit : SecurityIn
                         this.tb_Model_Name_zh_TW.Text = DT.Rows[0]["Model_Name_zh_TW"].ToString();   //品名(繁中)
                         this.tb_Model_Name_zh_CN.Text = DT.Rows[0]["Model_Name_zh_CN"].ToString();   //品名(簡中)
                         this.tb_Model_Name_en_US.Text = DT.Rows[0]["Model_Name_en_US"].ToString();   //品名(英文)
-                        this.lt_Model_Desc.Text = DT.Rows[0]["Model_Desc"].ToString();       //規格
+                        this.tb_Model_Desc.Text = DT.Rows[0]["Model_Desc"].ToString();       //規格
+                        this.tb_Model_Desc_zh_CN.Text = DT.Rows[0]["Model_Desc_zh_CN"].ToString();       //規格
+                        this.tb_Model_Desc_en_US.Text = DT.Rows[0]["Model_Desc_en_US"].ToString();       //規格
                         this.lt_BarCode.Text = DT.Rows[0]["BarCode"].ToString();       //條碼
                         this.lt_Catelog_Vol.Text = DT.Rows[0]["Catelog_Vol"].ToString();   //目錄
                         this.lt_Page.Text = DT.Rows[0]["Page"].ToString();   //頁次
@@ -724,6 +727,7 @@ public partial class Prod_Edit : SecurityIn
                 SBSql.AppendLine(" UPDATE Prod_Item SET ");
                 SBSql.AppendLine("  SpecClassID = @SpecClassID, Stop_Offer_Date = @Stop_Offer_Date");
                 SBSql.AppendLine("  , Model_Name_zh_TW = @Model_Name_zh_TW, Model_Name_zh_CN = @Model_Name_zh_CN, Model_Name_en_US = @Model_Name_en_US");
+                SBSql.AppendLine("  , Model_Desc_en_US = @Model_Desc_en_US");
                 SBSql.AppendLine("  , Pub_Patent_No = @Pub_Patent_No, Pub_Standard1 = @Pub_Standard1, Pub_Standard2 = @Pub_Standard2, Pub_Standard3 = @Pub_Standard3");
                 SBSql.AppendLine("  , Pub_Logo = @Pub_Logo, Pub_Logo_Printing = @Pub_Logo_Printing");
                 SBSql.AppendLine("  , Pub_PW_L = @Pub_PW_L, Pub_PW_W = @Pub_PW_W, Pub_PW_H = @Pub_PW_H, Pub_PW_Other = @Pub_PW_Other");
@@ -757,6 +761,9 @@ public partial class Prod_Edit : SecurityIn
                 cmd.Parameters.AddWithValue("Model_Name_zh_TW", this.tb_Model_Name_zh_TW.Text.Trim());
                 cmd.Parameters.AddWithValue("Model_Name_zh_CN", this.tb_Model_Name_zh_CN.Text.Trim());
                 cmd.Parameters.AddWithValue("Model_Name_en_US", this.tb_Model_Name_en_US.Text.Trim());
+                //規格
+                cmd.Parameters.AddWithValue("Model_Desc_en_US", this.tb_Model_Desc_en_US.Text.Trim());
+
                 //專利號碼, Pub_Patent_No
                 cmd.Parameters.AddWithValue("Pub_Patent_No", this.tb_Pub_Patent_No.Text.Trim());
                 cmd.Parameters.AddWithValue("Pub_Standard1", this.tb_Pub_Standard1.Text.Trim());
