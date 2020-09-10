@@ -9,7 +9,7 @@ using ProdCheckData.Controllers;
 /// 使用SelectPDF 產生 PDF
 /// </summary>
 /// <remarks>
-/// http://api.prokits.com.tw/PDF/f507450f1d94dec7ac6a268654eca5f1/?u=http://ProductCenter.prokits.com.tw/myProdCheck/Html_CheckView.aspx?DataID=4e936529-32aa-4baa-90e3-030347dbceba&f=查檢表.pdf
+/// GetFile_CheckView.ashx
 /// </remarks>
 public partial class myProdCheck_Html_CheckView : System.Web.UI.Page
 {

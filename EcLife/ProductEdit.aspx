@@ -204,7 +204,7 @@
                                     <div class="row">
                                         <div class="col s6">
                                             <label>
-                                                市價<%--MB047--%>
+                                                市價&nbsp;(ERP:台灣NTD網路價)<%--MB055--%>
                                             </label>
                                             <p>
                                                 <asp:Literal ID="lt_Price_Sale" runat="server"></asp:Literal>
@@ -212,7 +212,7 @@
                                         </div>
                                         <div class="col s6">
                                             <label>
-                                                網路價<%--MB047--%>
+                                                網路價&nbsp;(ERP:定價)<%--MB047--%>
                                             </label>
                                             <p>
                                                 <asp:Literal ID="lt_Price_Spical" runat="server"></asp:Literal>

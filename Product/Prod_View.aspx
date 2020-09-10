@@ -220,7 +220,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="TableModifyTdHead">替代品號
+                    <td class="TableModifyTdHead">替代品號<br />(產銷訊息)
                     </td>
                     <td class="TableModifyTd">
                         <table cellpadding="3" border="0" width="98%">
