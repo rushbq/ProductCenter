@@ -26,8 +26,9 @@ public partial class Product_Ascx_TabMenu : System.Web.UI.UserControl
             listTab.Add(new TabMenu("9", "Prod_MallPic.aspx?Lang=zh-TW&Model_No=" + Server.UrlEncode(Param_ModelNo), "商城輔圖(繁)", "_self"));
             listTab.Add(new TabMenu("10", "Prod_MallPic.aspx?Lang=en-US&Model_No=" + Server.UrlEncode(Param_ModelNo), "商城輔圖(英)", "_self"));
             listTab.Add(new TabMenu("20", "SupplierHistory.aspx?DataID=" + Server.UrlEncode(Param_ModelNo), "供應商採購記錄", "_self"));
-            listTab.Add(new TabMenu("30", "{0}EcLife/ProductEdit.aspx?DataID={1}".FormatThis(Application["WebUrl"], Server.UrlEncode(Param_ModelNo)), "良興商品維護", "_self"));
-            listTab.Add(new TabMenu("40", "{0}myProd_Extend/Prod_SetClass.aspx?DataID={1}".FormatThis(Application["WebUrl"], Server.UrlEncode(Param_ModelNo)), "電子目錄分類", "_self"));
+            listTab.Add(new TabMenu("30", "{0}EcLife/ProductEdit.aspx?DataID={1}".FormatThis(fn_Param.WebUrl, Server.UrlEncode(Param_ModelNo)), "良興商品維護", "_self"));
+            listTab.Add(new TabMenu("40", "{0}myProd_Extend/Prod_SetClass.aspx?DataID={1}".FormatThis(fn_Param.WebUrl, Server.UrlEncode(Param_ModelNo)), "電子目錄分類", "_self"));
+            listTab.Add(new TabMenu("50", "{0}myProd_Extend/Toy_SetClass.aspx?DataID={1}".FormatThis(fn_Param.WebUrl, Server.UrlEncode(Param_ModelNo)), "科玩分類", "_self"));
 
             StringBuilder sbTab = new StringBuilder();
             sbTab.AppendLine("<ul>");

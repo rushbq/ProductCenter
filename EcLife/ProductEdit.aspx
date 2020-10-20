@@ -200,7 +200,7 @@
                         <div class="row">
                             <div class="col s12">
                                 <blockquote class="color-blue">
-                                    <h6>價格</h6>
+                                    <h6>價格&nbsp;<small>(僅能在新增時同步)</small></h6>
                                     <div class="row">
                                         <div class="col s6">
                                             <label>
@@ -212,7 +212,7 @@
                                         </div>
                                         <div class="col s6">
                                             <label>
-                                                網路價&nbsp;(ERP:定價)<%--MB047--%>
+                                                網路價&nbsp;<%--(ERP:定價) MB047--%>
                                             </label>
                                             <p>
                                                 <asp:Literal ID="lt_Price_Spical" runat="server"></asp:Literal>

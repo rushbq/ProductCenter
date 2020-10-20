@@ -105,22 +105,20 @@
 
                     <asp:ListView ID="lvDataList" runat="server" ItemPlaceholderID="ph_Items" OnItemCommand="lvDataList_ItemCommand">
                         <LayoutTemplate>
-                            <div class="ui green attached segment">
-                                <table class="ui celled selectable compact small table">
-                                    <thead>
-                                        <tr>
-                                            <th class="grey-bg lighten-3" colspan="2">一階</th>
-                                            <th class="grey-bg lighten-3" colspan="2">二階</th>
-                                            <th class="grey-bg lighten-3" colspan="2">三階</th>
-                                            <th class="grey-bg lighten-3 collapsing">排序方式</th>
-                                            <th class="grey-bg lighten-3"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <asp:PlaceHolder ID="ph_Items" runat="server" />
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table class="ui celled selectable compact small table">
+                                <thead>
+                                    <tr>
+                                        <th class="grey-bg lighten-3" colspan="2">一階</th>
+                                        <th class="grey-bg lighten-3" colspan="2">二階</th>
+                                        <th class="grey-bg lighten-3" colspan="2">三階</th>
+                                        <th class="grey-bg lighten-3 collapsing">排序方式</th>
+                                        <th class="grey-bg lighten-3"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <asp:PlaceHolder ID="ph_Items" runat="server" />
+                                </tbody>
+                            </table>
                         </LayoutTemplate>
                         <ItemTemplate>
                             <tr>

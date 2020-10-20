@@ -169,7 +169,7 @@ public partial class Prod_Search : SecurityIn
             SBSql.AppendLine(" SELECT TBL.* ");
             SBSql.AppendLine(" FROM ( ");
             SBSql.AppendLine("    SELECT ");
-            SBSql.AppendLine("      RTRIM(Prod_Item.Model_No) AS Model_No, Prod_Item.BarCode, Prod_Item.Catelog_Vol, Prod_Item.Page");
+            SBSql.AppendLine("      RTRIM(Prod_Item.Model_No) AS Model_No, Prod_Item.BarCode, REPLACE(Prod_Item.Catelog_Vol, 'NULL', '') Catelog_Vol, REPLACE(Prod_Item.Page, 'NULL', '') Page");
             SBSql.AppendLine("      , Prod_Item.Ship_From, Prod_Item.Date_Of_Listing, Prod_Item.Stop_Offer_Date");
             //圖片(判斷圖片中心 2->1->3->4->5->7->8->9)
             SBSql.AppendLine("      , (SELECT TOP 1 (ISNULL(Pic02,'') + '|' + ISNULL(Pic01,'') + '|' + ISNULL(Pic03,'') + '|' + ISNULL(Pic04,'') ");
