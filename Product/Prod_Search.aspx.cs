@@ -33,7 +33,7 @@ public partial class Prod_Search : SecurityIn
             {
                 fn_Extensions.JsAlert("類別選單產生失敗！", "");
             }
-            this.ddl_Class_ID.Items.Insert(0, "-- 所有資料 --");
+            this.ddl_Class_ID.Items.Insert(0, "-- 全類別 --");
             this.ddl_Class_ID.Items[0].Value = "All";
 
             //[取得/檢查參數] - Model_No(品號)
@@ -74,6 +74,12 @@ public partial class Prod_Search : SecurityIn
             if (fn_Extensions.String_字數(Request.QueryString["VolPage"], "1", "5", out ErrMsg))
             {
                 this.tb_VoltoPage.Text = Request.QueryString["VolPage"].ToString();
+            }
+
+            //[取得/檢查參數] - Barcode
+            if (fn_Extensions.String_字數(Request.QueryString["bc"], "1", "40", out ErrMsg))
+            {
+                this.tb_Barcode.Text = Request.QueryString["bc"].ToString();
             }
 
             //[取得/檢查參數] - page(頁數)
@@ -253,6 +259,15 @@ public partial class Prod_Search : SecurityIn
 
                 this.ViewState["Page_LinkStr"] += "&VolPage=" + Server.UrlEncode(this.tb_VoltoPage.Text);
             }
+
+            //[取得/檢查參數] - 條碼
+            if (string.IsNullOrEmpty(this.tb_Barcode.Text) == false)
+            {
+                SBSql.Append(" AND (Prod_Item.Barcode LIKE '%' + UPPER(@Barcode) + '%') ");
+                cmd.Parameters.AddWithValue("Barcode", this.tb_Barcode.Text);
+
+                this.ViewState["Page_LinkStr"] += "&bc=" + Server.UrlEncode(this.tb_Barcode.Text);
+            }
             #endregion
 
             SBSql.AppendLine("       ) AS TBL ");
@@ -325,6 +340,13 @@ public partial class Prod_Search : SecurityIn
             {
                 SBSql.Append(" AND (Prod_Item.Page = @VolPage) ");
                 cmdTotalCnt.Parameters.AddWithValue("VolPage", this.tb_VoltoPage.Text);
+            }
+
+            //[取得/檢查參數] - 條碼
+            if (string.IsNullOrEmpty(this.tb_Barcode.Text) == false)
+            {
+                SBSql.Append(" AND (Prod_Item.Barcode LIKE '%' + UPPER(@Barcode) + '%') ");
+                cmdTotalCnt.Parameters.AddWithValue("Barcode", this.tb_Barcode.Text);
             }
             #endregion
 
@@ -560,6 +582,11 @@ public partial class Prod_Search : SecurityIn
                 SBUrl.Append("&VolPage=" + Server.UrlEncode(this.tb_VoltoPage.Text));
             }
 
+            //[取得/檢查參數] - Barcode
+            if (string.IsNullOrEmpty(this.tb_Barcode.Text) == false)
+            {
+                SBUrl.Append("&bc=" + Server.UrlEncode(this.tb_Barcode.Text));
+            }
             //執行轉頁
             Response.Redirect(SBUrl.ToString(), false);
         }

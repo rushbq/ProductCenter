@@ -1558,7 +1558,7 @@ namespace ExtensionMethods
                         //判斷是否要顯示索引文字
                         if (showRoot)
                         {
-                            setMenu.Items.Insert(0, new ListItem("-- 選擇目錄 --", ""));
+                            setMenu.Items.Insert(0, new ListItem("-- 不限 --", ""));
                         }
                     }
                 }

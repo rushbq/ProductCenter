@@ -120,13 +120,7 @@
 
             //Click事件 - 清除搜尋條件
             $("input#clear_form").click(function () {
-                $("#tb_Model_No").val("");
-                $("#tb_StartDate").val("");
-                $("#tb_EndDate").val("");
-                $("#tb_VoltoPage").val("");
-                $("select#ddl_Class_ID")[0].selectedIndex = 0;
-                $("select#ddl_ShipFrom")[0].selectedIndex = 0;
-                $("select#ddl_Vol")[0].selectedIndex = 0;
+                location.href = 'Prod_Search.aspx';
             });
 
         });
@@ -191,21 +185,29 @@
             <h2>
                 <%=Navi_產品列表%></h2>
         </div>
-        <!-- Basic Sift -->
+        <!-- Search Start -->
         <div class="Sift">
             <ul>
-                <li>品號/品名關鍵字：<asp:TextBox ID="tb_Model_No" runat="server" MaxLength="40" Width="300px" CssClass="styleBlack" placeholder="輸入關鍵字:品號或品名"></asp:TextBox>
+                <li>品號/品名關鍵字：<asp:TextBox ID="tb_Model_No" runat="server" MaxLength="40" Width="200px" CssClass="styleBlack" placeholder="輸入關鍵字:品號或品名"></asp:TextBox>
                 </li>
                 <li>銷售類別：
                 <asp:DropDownList ID="ddl_Class_ID" runat="server" CssClass="styleBlack">
                 </asp:DropDownList>
                 </li>
+                <li>主要出貨地：
+                    <asp:DropDownList ID="ddl_ShipFrom" runat="server" CssClass="styleBlack">
+                        <asp:ListItem Value="">-- 不限 --</asp:ListItem>
+                        <asp:ListItem Value="TW">TW</asp:ListItem>
+                        <asp:ListItem Value="SH">SH</asp:ListItem>
+                        <%--<asp:ListItem Value="SZ">SZ</asp:ListItem>--%>
+                    </asp:DropDownList>
+                </li>
             </ul>
             <ul>
                 <li>上市日期：
-                    <asp:TextBox ID="tb_StartDate" runat="server" Style="text-align: center" Width="90px" CssClass="styleBlack"></asp:TextBox>&nbsp;
+                    <asp:TextBox ID="tb_StartDate" runat="server" Style="text-align: center" Width="90px" CssClass="styleBlack" autocomplete="off"></asp:TextBox>&nbsp;
                     ~
-                    <asp:TextBox ID="tb_EndDate" runat="server" Style="text-align: center" Width="90px" CssClass="styleBlack"></asp:TextBox>
+                    <asp:TextBox ID="tb_EndDate" runat="server" Style="text-align: center" Width="90px" CssClass="styleBlack" autocomplete="off"></asp:TextBox>
 
                     <asp:RegularExpressionValidator ID="rev_tb_StartDate" runat="server" ErrorMessage="「開始日期」格式錯誤."
                         ControlToValidate="tb_StartDate" ValidationExpression="(19|20)[0-9]{2}[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])"
@@ -214,30 +216,23 @@
                         ControlToValidate="tb_EndDate" ValidationExpression="(19|20)[0-9]{2}[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])"
                         Display="Dynamic" CssClass="styleRed help-block"></asp:RegularExpressionValidator>
                 </li>
-                <li>主要出貨地：
-                    <asp:DropDownList ID="ddl_ShipFrom" runat="server" CssClass="styleBlack">
-                        <asp:ListItem Value="">-- 所有資料 --</asp:ListItem>
-                        <asp:ListItem Value="TW">TW</asp:ListItem>
-                        <asp:ListItem Value="SH">SH</asp:ListItem>
-                        <asp:ListItem Value="SZ">SZ</asp:ListItem>
-                    </asp:DropDownList>
-                </li>
-            </ul>
-            <ul>
                 <li>目錄：
                     <asp:DropDownList ID="ddl_Vol" runat="server" CssClass="styleBlack">
                     </asp:DropDownList>
-
+                    &nbsp;
                     頁次：
-                    <asp:TextBox ID="tb_VoltoPage" runat="server" MaxLength="10" CssClass="styleBlack"></asp:TextBox>
+                    <asp:TextBox ID="tb_VoltoPage" runat="server" MaxLength="8" CssClass="styleBlack" Width="90px" autocomplete="off"></asp:TextBox>
+                    &nbsp;
+                    條碼：
+                    <asp:TextBox ID="tb_Barcode" runat="server" MaxLength="50" CssClass="styleBlack" Width="130px" autocomplete="off"></asp:TextBox>
                 </li>
-                <li>
+                <li style="background:none">
                     <asp:Button ID="btn_Search" runat="server" Text="查詢" OnClick="btn_Search_Click" CssClass="btn btn-success" />
-                    <input type="button" id="clear_form" value="重置篩選" title="重置篩選條件" class="btn btn-default" />
+                    <input type="button" id="clear_form" value="重置" title="重置篩選條件" class="btn btn-default" />
                 </li>
             </ul>
         </div>
-
+        <!-- Search End -->
         <div class="table-responsive">
             <asp:ListView ID="lvDataList" runat="server" ItemPlaceholderID="ph_Items" OnItemDataBound="lvDataList_ItemDataBound">
                 <LayoutTemplate>
