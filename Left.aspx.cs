@@ -161,15 +161,25 @@ public partial class Left : SecurityIn
                         SBHtml.AppendLine(" <ul>");
                         for (int i = 0; i <= DT.Rows.Count - 1; i++)
                         {
-                            string ProgID = DT.Rows[i]["Prog_ID"].ToString();
 
+                            //reset redirect url
+                            string rtUrl = fn_Param.WebUrl + "redirect.aspx?menuID=$id$&url=$url$";
+
+                            //params
+                            string menuID = DT.Rows[i]["Prog_ID"].ToString();
+                            string url = DT.Rows[i]["Prog_Link"].ToString();
+
+                            //replace url
+                            rtUrl = rtUrl
+                                .Replace("$id$", menuID)
+                                .Replace("$url$", url);
 
                             //Html
-                            SBHtml.Append("<li id=\"li_{0}\">".FormatThis(ProgID));
+                            SBHtml.Append("<li id=\"li_{0}\">".FormatThis(menuID));
 
                             SBHtml.AppendLine(string.Format("<a href=\"{1}\" onclick=\"fmenu('{2}', 'Y', '{4}');SubClick('{0}');\">{3}</a>"
-                                        , DT.Rows[i]["Prog_ID"].ToString()
-                                        , DT.Rows[i]["Prog_Link"].ToString()
+                                        , menuID
+                                        , rtUrl
                                         , Sort
                                         , DT.Rows[i]["Prog_Name"].ToString()
                                         , CssStyle));
