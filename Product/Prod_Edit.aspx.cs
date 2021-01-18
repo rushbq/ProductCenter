@@ -227,9 +227,11 @@ public partial class Prod_Edit : SecurityIn
                     }
                     else
                     {
+                        string _ModelNo = DT.Rows[0]["Model_No"].ToString().Trim();
+
                         //填入基本資料
                         #region -基本資料-
-                        this.lb_Model_No.Text = DT.Rows[0]["Model_No"].ToString().Trim();     //品號
+                        this.lb_Model_No.Text = _ModelNo;     //品號
                         this.lb_Item_No.Text = DT.Rows[0]["Item_No"].ToString().Trim();       //貨號
                         this.lb_Class_ID.Text = "{0} - {1}".FormatThis(DT.Rows[0]["Class_ID"].ToString(), DT.Rows[0]["Class_Name"].ToString());     //銷售類別
                         this.lb_Warehouse_Class_ID.Text = DT.Rows[0]["Warehouse_Class_Name"].ToString();     //倉管類別
@@ -363,7 +365,7 @@ public partial class Prod_Edit : SecurityIn
                         this.rbl_Pub_Recommended.Text = DT.Rows[0]["Pub_Recommended"].ToString();
                         this.lt_Pub_Notes.Text = DT.Rows[0]["Pub_Notes"].ToString().Replace("\r\n", "<BR/>");
                         //this.tb_Pub_Features_Remark.Text = DT.Rows[0]["Pub_Features_Remark"].ToString();  //--removed
-                        this.lt_Pub_Card_Model_No.Text = DT.Rows[0]["Pub_Card_Model_No"].ToString();
+                        //this.lt_Pub_Card_Model_No.Text = DT.Rows[0]["Pub_Card_Model_No"].ToString();
                         this.lt_Pub_Alternate2.Text = DT.Rows[0]["Pub_Alternate2"].ToString();
                         this.lt_Pub_Message.Text = DT.Rows[0]["Pub_Message"].ToString().Replace("\r\n", "<BR/>");
                         //產品線圖  
@@ -376,8 +378,12 @@ public partial class Prod_Edit : SecurityIn
                         }
                         //帶出產品檢驗輔助圖片
                         Lookup_QCPics();
+
                         //帶出品管檢驗項目
-                        Lookup_QCItems(DT.Rows[0]["Ship_From"].ToString(), DT.Rows[0]["Pub_QC_Category"].ToString(), DT.Rows[0]["Model_No"].ToString());
+                        Lookup_QCItems(DT.Rows[0]["Ship_From"].ToString(), DT.Rows[0]["Pub_QC_Category"].ToString(), _ModelNo);
+
+                        //卡片項目
+                        Lookup_CardItems(_ModelNo);
 
                         //理想用途
                         this.tb_Use_Item_Val.Text = DT.Rows[0]["Pub_Use"].ToString();
@@ -560,6 +566,50 @@ public partial class Prod_Edit : SecurityIn
                 rbl_Display.SelectedIndex = rbl_Display.Items.IndexOf(rbl_Display.Items.FindByValue("Y"));
             }
         }
+    }
+
+
+    /// <summary>
+    /// 帶出卡片項目
+    /// </summary>
+    /// <param name="ModelNo">品號</param>
+    private void Lookup_CardItems(string ModelNo)
+    {
+        try
+        {
+            string ErrMsg = "";
+            //[取得資料] - 品管檢驗項目
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                string sql = @"SELECT PackItemNo, PackQty FROM Prod_Rel_Package WHERE (ModelNo = @ModelNo)";
+
+                cmd.CommandText = sql;
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("ModelNo", ModelNo);
+                using (DataTable DT = dbConClass.LookupDT(cmd, out ErrMsg))
+                {
+                    string html = "";
+
+                    for (int row = 0; row < DT.Rows.Count; row++)
+                    {
+                        html += "<tr>";
+                        html += "<td>{0}</td><td align=\"center\">{1}</td>".FormatThis(
+                            DT.Rows[row]["PackItemNo"]
+                            , DT.Rows[row]["PackQty"]
+                            );
+                        html += "</tr>";
+                    }
+
+                    lt_CardItems.Text = html;
+                }
+            }
+        }
+        catch (Exception)
+        {
+            fn_Extensions.JsAlert("系統發生錯誤 - 卡片項目！", "");
+            return;
+        }
+
     }
     #endregion
 

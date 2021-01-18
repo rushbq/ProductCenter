@@ -1021,10 +1021,24 @@
                     </td>
                 </tr>--%>
                 <tr>
-                    <td class="TableModifyTdHead">卡片品號
+                    <td class="TableModifyTdHead">卡片
                     </td>
                     <td class="TableModifyTd">
-                        <asp:Literal ID="lt_Pub_Card_Model_No" runat="server"></asp:Literal>
+                        <table class="List1" width="100%">
+                            <thead>
+                                <tr class="tdHead">
+                                    <td width="70%">卡片品號
+                                    </td>
+                                    <td width="30%">數量
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <asp:Literal ID="lt_CardItems" runat="server"></asp:Literal>
+                            </tbody>
+                        </table>
+
+                        <%--<asp:Literal ID="lt_Pub_Card_Model_No" runat="server"></asp:Literal>--%>
                     </td>
                     <td class="TableModifyTdHead"></td>
                     <td class="TableModifyTd"></td>
