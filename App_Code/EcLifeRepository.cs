@@ -61,9 +61,10 @@ namespace EcLifeData.Controllers
                 sql.AppendLine("   , ISNULL(Info.Info5, '') AS Desc_Classics, Info.Info2 AS Desc_Feature, Info.Info4 AS Desc_Standards, Info.Info3 AS Append_Feature");
                 sql.AppendLine("   , Prod.Pub_Individual_Packing_zh_TW AS Desc_Introduce");
 
-                //ERP價格(市價Price_Sale = MB055, 網路價Price_Spical = MB047=>0)
+                //ERP價格(市價Price_Sale, 網路價Price_Spical / ERP:NTD網路價MB055)
                 sql.AppendLine("   , 1 AS Price_Cost"); //成本不提供(預設給 1,良興才能處理)
-                sql.AppendLine("   , ISNULL(INVMB.MB055, 0) Price_Sale, 1 AS Price_Spical"); //網路價固定為1 #15-20200923-0002
+                //sql.AppendLine("   , ISNULL(INVMB.MB055, 0) Price_Sale, 1 AS Price_Spical"); //網路價固定為1 #15-20200923-0002
+                sql.AppendLine("   , ISNULL(INVMB.MB055, 0) Price_Sale, ISNULL(INVMB.MB055, 0) AS Price_Spical"); //#15-20210115-0003
 
                 sql.AppendLine("   , (SELECT Account_Name + ' (' + Display_Name + ')' FROM PKSYS.dbo.User_Profile WHERE (Guid = Base.Create_Who)) AS Create_Name ");
                 sql.AppendLine("   , (SELECT Account_Name + ' (' + Display_Name + ')' FROM PKSYS.dbo.User_Profile WHERE (Guid = Base.Update_Who)) AS Update_Name ");
@@ -157,8 +158,7 @@ namespace EcLifeData.Controllers
 
                             Price_Cost = 1,
                             Price_Sale = Math.Round(item.Field<Decimal>("Price_Sale"), 0),
-                            //Price_Spical = Math.Round(item.Field<Decimal>("Price_Spical"), 0),
-                            Price_Spical = 1,
+                            Price_Spical = Math.Round(item.Field<Decimal>("Price_Spical"), 0),
 
                             Create_Time = item.Field<DateTime?>("Create_Time").ToString().ToDateString("yyyy/MM/dd HH:mm"),
                             Update_Time = item.Field<DateTime?>("Update_Time").ToString().ToDateString("yyyy/MM/dd HH:mm"),
