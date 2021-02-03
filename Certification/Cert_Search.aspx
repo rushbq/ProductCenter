@@ -40,7 +40,7 @@
                         <div class="ui fluid search ac-ModelNo">
                             <div class="ui right labeled input">
                                 <asp:TextBox ID="tb_Model_No" runat="server" CssClass="prompt" MaxLength="40"></asp:TextBox>
-                                <asp:Panel ID="lb_ModelNo" runat="server" CssClass="ui label">品號/品名關鍵字</asp:Panel>
+                                <asp:Panel ID="lb_ModelNo" runat="server" CssClass="ui label">品號關鍵字</asp:Panel>
                             </div>
                         </div>
                     </div>

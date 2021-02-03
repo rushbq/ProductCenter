@@ -37,9 +37,15 @@ public partial class Prod_Search : SecurityIn
             this.ddl_Class_ID.Items[0].Value = "All";
 
             //[取得/檢查參數] - Model_No(品號)
-            if (fn_Extensions.String_字數(Request.QueryString["Model_No"], "1", "100", out ErrMsg))
+            if (fn_Extensions.String_字數(Request.QueryString["Model_No"], "1", "50", out ErrMsg))
             {
                 this.tb_Model_No.Text = Request.QueryString["Model_No"].ToString().Trim().ToUpper();
+            }
+
+            //[取得/檢查參數] - currModel(指定品號)
+            if (fn_Extensions.String_字數(Request.QueryString["currModel"], "1", "40", out ErrMsg))
+            {
+                this.tb_CurrModelNo.Text = Request.QueryString["currModel"].ToString().Trim().ToUpper();
             }
 
             //[取得/檢查參數] - Class_ID(銷售類別)
@@ -208,6 +214,14 @@ public partial class Prod_Search : SecurityIn
                 this.ViewState["Page_LinkStr"] += "&Model_No=" + Server.UrlEncode(this.tb_Model_No.Text);
             }
 
+            //[查詢條件] - currModel(指定品號)
+            if (string.IsNullOrEmpty(this.tb_CurrModelNo.Text) == false)
+            {
+                SBSql.Append(" AND (UPPER(Prod_Item.Model_No) = UPPER(@currModel))");
+
+                cmd.Parameters.AddWithValue("currModel", this.tb_CurrModelNo.Text);
+            }
+
             //[查詢條件] - Class_ID(類別)
             if (this.ddl_Class_ID.SelectedIndex > 0)
             {
@@ -300,6 +314,14 @@ public partial class Prod_Search : SecurityIn
                 SBSql.Append(" ) ");
 
                 cmdTotalCnt.Parameters.AddWithValue("Model_No", this.tb_Model_No.Text);
+            }
+
+            //[查詢條件] - currModel(指定品號)
+            if (string.IsNullOrEmpty(this.tb_CurrModelNo.Text) == false)
+            {
+                SBSql.Append(" AND (UPPER(Prod_Item.Model_No) = UPPER(@currModel))");
+
+                cmdTotalCnt.Parameters.AddWithValue("currModel", this.tb_CurrModelNo.Text);
             }
 
             //[查詢條件] - Class_ID(類別)
@@ -546,6 +568,12 @@ public partial class Prod_Search : SecurityIn
             if (string.IsNullOrEmpty(this.tb_Model_No.Text) == false)
             {
                 SBUrl.Append("&Model_No=" + Server.UrlEncode(this.tb_Model_No.Text));
+            }
+
+            //[查詢條件] - currModel(指定品號)
+            if (string.IsNullOrEmpty(this.tb_CurrModelNo.Text) == false)
+            {
+                SBUrl.Append("&currModel=" + Server.UrlEncode(this.tb_CurrModelNo.Text));
             }
 
             //[查詢條件] - Class_ID(類別)

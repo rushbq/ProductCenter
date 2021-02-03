@@ -516,7 +516,7 @@ public partial class Cert_Search : SecurityIn
                 switch (item.Key)
                 {
                     case "Model_No":
-                        sql.Append(" AND (UPPER(Certi.Model_No) LIKE '%' + UPPER(@Model_No) + '%')");
+                        sql.Append(" AND (UPPER(Certi.Model_No) LIKE UPPER(@Model_No) + '%')");
 
                         break;
 
@@ -827,7 +827,7 @@ public partial class Cert_Search : SecurityIn
                         switch (item.Key)
                         {
                             case "Model_No":
-                                sql.Append(" AND (UPPER(Base.Model_No) LIKE '%' + UPPER(@Model_No) + '%')");
+                                sql.Append(" AND (UPPER(Base.Model_No) LIKE UPPER(@Model_No) + '%')");
                                 cmd.Parameters.AddWithValue("Model_No", item.Value);
 
                                 break;

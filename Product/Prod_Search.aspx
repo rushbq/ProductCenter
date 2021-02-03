@@ -64,7 +64,7 @@
             });
 
             /* Autocomplete - 群組分類(品號) */
-            $("#tb_Model_No").catcomplete({
+            $(".Ac-Prod").catcomplete({
                 minLength: 2,  //至少要輸入 n 個字元
                 source: function (request, response) {
                     $.ajax({
@@ -188,7 +188,10 @@
         <!-- Search Start -->
         <div class="Sift">
             <ul>
-                <li>品號/品名關鍵字：<asp:TextBox ID="tb_Model_No" runat="server" MaxLength="40" Width="200px" CssClass="styleBlack" placeholder="輸入關鍵字:品號或品名"></asp:TextBox>
+                <li>關鍵字：<asp:TextBox ID="tb_Model_No" runat="server" MaxLength="40" Width="180px" CssClass="Ac-Prod styleBlack" placeholder="輸入關鍵字:品號或品名"></asp:TextBox>
+                </li>
+                <li>指定品號：
+                    <asp:TextBox ID="tb_CurrModelNo" runat="server" MaxLength="40" Width="180px" CssClass="Ac-Prod styleBlack" placeholder="輸入品號"></asp:TextBox>
                 </li>
                 <li>銷售類別：
                 <asp:DropDownList ID="ddl_Class_ID" runat="server" CssClass="styleBlack">
@@ -199,7 +202,6 @@
                         <asp:ListItem Value="">-- 不限 --</asp:ListItem>
                         <asp:ListItem Value="TW">TW</asp:ListItem>
                         <asp:ListItem Value="SH">SH</asp:ListItem>
-                        <%--<asp:ListItem Value="SZ">SZ</asp:ListItem>--%>
                     </asp:DropDownList>
                 </li>
             </ul>

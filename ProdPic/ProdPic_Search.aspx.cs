@@ -144,7 +144,7 @@ public partial class ProdPic_Search : SecurityIn
             //[查詢條件] - Model_No(品號)
             if (string.IsNullOrEmpty(this.tb_Model_No.Text) == false)
             {
-                SBSql.Append(" AND (UPPER(Prod_Item.Model_No) LIKE '%' + UPPER(@Model_No) + '%') ");
+                SBSql.Append(" AND (UPPER(Prod_Item.Model_No) LIKE UPPER(@Model_No) + '%') ");
                 cmd.Parameters.AddWithValue("Model_No", this.tb_Model_No.Text);
 
                 this.ViewState["Page_LinkStr"] += "&Model_No=" + Server.UrlEncode(this.tb_Model_No.Text);
@@ -178,7 +178,7 @@ public partial class ProdPic_Search : SecurityIn
             //[查詢條件] - Model_No(品號)
             if (string.IsNullOrEmpty(this.tb_Model_No.Text) == false)
             {
-                SBSql.Append(" AND (UPPER(Prod_Item.Model_No) LIKE '%' + UPPER(@Model_No) + '%') ");
+                SBSql.Append(" AND (UPPER(Prod_Item.Model_No) LIKE UPPER(@Model_No) + '%') ");
                 cmdTotalCnt.Parameters.AddWithValue("Model_No", this.tb_Model_No.Text);
             }
 
