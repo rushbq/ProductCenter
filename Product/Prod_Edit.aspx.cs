@@ -212,8 +212,15 @@ public partial class Prod_Edit : SecurityIn
                 SBSql.AppendLine(" , Main.Pub_Carton_L, Main.Pub_Carton_W, Main.Pub_Carton_H, Main.Pub_Carton_CUFT ");
                 SBSql.AppendLine(" , Main.Pub_QC_Category, Main.Pub_Notes ");
                 SBSql.AppendLine(" , Main.Pub_Card_Model_No, Main.Pub_Alternate2, Main.Pub_Message ");
-                SBSql.AppendLine(" FROM Prod_Item Main ");
+                /* EDM 停售發佈時間 */
+                SBSql.Append(", (");
+                SBSql.Append(" SELECT TOP 1 CONVERT(VARCHAR, Base.SendTime, 111) AS StopDate");
+                SBSql.Append(" FROM [eDM].dbo.EDM_List Base INNER JOIN [eDM].dbo.EDM_Rel_ModelNo Rel ON Base.EDM_ID = Rel.EDM_ID");
+                SBSql.Append(" WHERE (Base.Template_ClassID = 4) AND (Base.InProcess = 'Y') AND (Rel.Model_No = Main.Model_No)");
+                SBSql.Append(" ORDER BY Base.SendTime DESC");
+                SBSql.Append(" ) StopDate");
 
+                SBSql.AppendLine(" FROM Prod_Item Main ");
                 SBSql.AppendLine(" WHERE (Main.Model_No = @Param_ModelNo) ");
                 cmd.CommandText = SBSql.ToString();
                 cmd.Parameters.Clear();
@@ -241,7 +248,8 @@ public partial class Prod_Edit : SecurityIn
                           this.ddl_SpecClass.Items.FindByValue(DT.Rows[0]["SpecClassID"].ToString())
                           );
                         this.lt_Date_Of_Listing.Text = DT.Rows[0]["Date_Of_Listing"].ToString().ToDateString_ERP("-");   //上市日期
-                        this.tb_Stop_Offer_Date.Text = DT.Rows[0]["Stop_Offer_Date"].ToString().ToDateString("yyyy-MM-dd");   //停售日期
+                        this.tb_Stop_Offer_Date.Text = DT.Rows[0]["Stop_Offer_Date"].ToString().ToDateString("yyyy-MM-dd");   //官網停售日期
+                        this.lt_Edm_StopDate.Text = DT.Rows[0]["StopDate"].ToString(); //edm發佈日
                         this.tb_Part_No.Text = DT.Rows[0]["Part_No"].ToString().Trim();   //子件型號
                         this.tb_Model_Name_zh_TW.Text = DT.Rows[0]["Model_Name_zh_TW"].ToString();   //品名(繁中)
                         this.tb_Model_Name_zh_CN.Text = DT.Rows[0]["Model_Name_zh_CN"].ToString();   //品名(簡中)

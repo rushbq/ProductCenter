@@ -138,7 +138,14 @@
                     <td class="TableModifyTdHead">停售日期
                     </td>
                     <td class="TableModifyTd">
-                        <asp:Literal ID="lt_Stop_Offer_Date" runat="server"></asp:Literal>
+                        <div>
+                            <span class="styleBlue">(官網)</span>
+                            <asp:Literal ID="lt_Stop_Offer_Date" runat="server"></asp:Literal>
+                        </div>
+                        <div title="來源:寶工EDM" style="padding-top: 5px;">
+                            <span class="styleBlue">(內部發佈)</span>
+                            <asp:Literal ID="lt_Edm_StopDate" runat="server"></asp:Literal>
+                        </div>
                     </td>
                 </tr>
                 <tr class="Must">

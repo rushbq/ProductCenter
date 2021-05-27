@@ -354,11 +354,18 @@
                     <td class="TableModifyTdHead BgBlue">停售日期
                     </td>
                     <td class="TableModifyTd">
-                        <asp:TextBox ID="tb_Stop_Offer_Date" runat="server" CssClass="input02" Style="text-align: center;"
-                            Width="100px" ValidationGroup="Add"></asp:TextBox><br />
-                        <asp:RegularExpressionValidator ID="rev_Stop_Offer_Date" runat="server" ErrorMessage="-&gt; 「停售日期」格式錯誤"
-                            ControlToValidate="tb_Stop_Offer_Date" ValidationExpression="(19|20)[0-9]{2}[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])"
-                            Display="Dynamic" ForeColor="Red" ValidationGroup="Add"></asp:RegularExpressionValidator>
+                        <div>
+                            <span class="styleBlue">(官網)</span>
+                            <asp:TextBox ID="tb_Stop_Offer_Date" runat="server" CssClass="input02" Style="text-align: center;"
+                                Width="100px" ValidationGroup="Add"></asp:TextBox><br />
+                            <asp:RegularExpressionValidator ID="rev_Stop_Offer_Date" runat="server" ErrorMessage="-&gt; 「官網停售日期」格式錯誤"
+                                ControlToValidate="tb_Stop_Offer_Date" ValidationExpression="(19|20)[0-9]{2}[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])"
+                                Display="Dynamic" ForeColor="Red" ValidationGroup="Add"></asp:RegularExpressionValidator>
+                        </div>
+                        <div title="來源:寶工EDM" style="padding-top: 5px;">
+                            <span class="styleBlue">(內部發佈)</span>
+                            <asp:Literal ID="lt_Edm_StopDate" runat="server"></asp:Literal>
+                        </div>
                     </td>
                 </tr>
                 <tr class="Must">

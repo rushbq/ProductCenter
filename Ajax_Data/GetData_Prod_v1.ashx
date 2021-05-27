@@ -29,7 +29,7 @@ public class GetData_Prod_v1 : IHttpHandler
         //----- 原始資料:條件篩選 -----
         if (!string.IsNullOrEmpty(searchVal))
         {
-            search.Add((int)Common.ProdSearch.Keyword, searchVal);
+            search.Add((int)Common.ProdSearch.ItemKey, searchVal);
         }
 
 

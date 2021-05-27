@@ -192,6 +192,15 @@ public partial class Prod_Search : SecurityIn
             //類別(依語系)
             SBSql.AppendLine(string.Format(", Prod_Class.Class_Name_{0} AS Class_Name ", "zh_TW"));
             SBSql.Append(string.Format(", Prod_Item.Model_Name_{0} AS Model_Name ", "zh_TW"));
+
+            /* EDM 停售發佈時間 */
+            SBSql.Append(", (");
+            SBSql.Append(" SELECT TOP 1 CONVERT(VARCHAR, Base.SendTime, 111) AS StopDate");
+            SBSql.Append(" FROM [eDM].dbo.EDM_List Base INNER JOIN [eDM].dbo.EDM_Rel_ModelNo Rel ON Base.EDM_ID = Rel.EDM_ID");
+            SBSql.Append(" WHERE (Base.Template_ClassID = 4) AND (Base.InProcess = 'Y') AND (Rel.Model_No = Prod_Item.Model_No)");
+            SBSql.Append(" ORDER BY Base.SendTime DESC");
+            SBSql.Append(" ) StopDate");
+
             SBSql.AppendLine("    FROM Prod_Item AS Prod_Item ");
             SBSql.AppendLine("         INNER JOIN Prod_Class ON Prod_Item.Class_ID = Prod_Class.Class_ID ");
             //[SQL] - 條件, 顯示不為 0類 的品號

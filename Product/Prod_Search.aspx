@@ -316,8 +316,9 @@
                         <td align="center">
                             <%#Eval("Date_Of_Listing").ToString().ToDateString_ERP("-")%>
                         </td>
-                        <td align="center">
-                            <%#Eval("Stop_Offer_Date").ToString().ToDateString("yyyy-MM-dd")%>
+                        <td align="left">
+                            <div><small class="styleGraylight">(官網)</small><br />&nbsp;<%#Eval("Stop_Offer_Date").ToString().ToDateString("yyyy-MM-dd")%></div>
+                            <div title="來源:寶工EDM" style="padding-top:5px;"><small class="styleGraylight">(內部發佈)</small><br />&nbsp;<%#Eval("StopDate").ToString().ToDateString("yyyy-MM-dd")%></div>
                         </td>
                         <td align="center">
                             <a href="http://ef.prokits.com.tw/employee/pdf/sipdb1_pdf.asp?item_id=<%# Server.UrlEncode(Eval("Model_No").ToString())%>"
