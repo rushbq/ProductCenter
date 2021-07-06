@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Prod_MallPic.aspx.cs" Inherits="Prod_MallPic"
     ValidateRequest="false" %>
 
+<%@ Import Namespace="PKLib_Method.Methods" %>
 <%@ Register Src="Ascx_TabMenu.ascx" TagName="Ascx_TabMenu" TagPrefix="ucTab" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -159,15 +160,31 @@
                                 <img src="<%=Param_WebFolder %><%# Eval("PicFile")%>" class="img-thumbnail img-responsive" alt="" />
                             </a>
                         </td>
-                        <td align="center">
-                            <div class="form-group">
+                        <td>
+                            <div class="row">
                                 <div class="col-xs-12">
                                     <asp:TextBox ID="tb_Desc" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="7" MaxLength="500" placeholder="可填寫簡易說明,最多500字" Text='<%# Eval("PicDesc")%>'></asp:TextBox>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="row">
                                 <div class="col-xs-12">
-                                    <input type="text" class="form-control url" value="<%=Param_WebFolder %><%# Eval("PicFile")%>" readonly="readonly" />
+                                    <input type="text" class="form-control url" value="<%=Param_WebFolder %><%#Eval("PicFile")%>" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <ul class="list-group">
+                                        <li class="list-group-item help-block">
+                                            <span class="label label-primary">建立</span>
+                                            <span class="text-primary"><%#Eval("Create_Time").ToString().ToDateString("yyyy/MM/dd HH:mm") %></span>&nbsp;,<%#Eval("Create_Name") %>
+
+                                        </li>
+                                        <li class="list-group-item help-block">
+                                            <span class="label label-info">更新</span>
+                                            <span class="text-info"><%#Eval("Update_Time").ToString().ToDateString("yyyy/MM/dd HH:mm") %></span>&nbsp;,<%#Eval("Update_Name") %>
+
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </td>

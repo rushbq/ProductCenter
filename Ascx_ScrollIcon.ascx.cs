@@ -9,7 +9,8 @@ public partial class Ascx_ScrollIcon : System.Web.UI.UserControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack) {
+        if (!IsPostBack)
+        {
             if (Session["BackListUrl"] == null)
             {
                 Session["BackListUrl"] = "../main.aspx";
@@ -53,6 +54,12 @@ public partial class Ascx_ScrollIcon : System.Web.UI.UserControl
             {
                 this.pl_Bottom.Visible = false;
             }
+
+            //Info Model Message
+            if (!string.IsNullOrWhiteSpace(ModelNo))
+            {
+                ph_infoMsg.Visible = true;
+            }
         }
     }
 
@@ -79,6 +86,21 @@ public partial class Ascx_ScrollIcon : System.Web.UI.UserControl
 
     private string _ShowBottom;
     public string ShowBottom
+    {
+        get;
+        set;
+    }
+
+    private string _ModelNo;
+    public string ModelNo
+    {
+        get;
+        set;
+    }
+
+
+    private string _Lang;
+    public string Lang
     {
         get;
         set;

@@ -40,9 +40,7 @@
                 <%=Navi_系統首頁%></a>&gt;<a><%=Navi_產品資料庫%></a>&gt;<span><%=Navi_產品資料%></span>
         </div>
         <div class="h2Head">
-            <h2>
-                <%=Navi_產品資料%>
-            -
+            <h2>產品資訊 -
             <asp:Label ID="lb_Model_No" runat="server" CssClass="styleRed B"><%=Param_ModelNo %></asp:Label>
             </h2>
         </div>
@@ -54,7 +52,7 @@
             </div>--%>
         </div>
         <table class="TableModify">
-<%--            <!-- // 規格符號 Start // -->
+            <%--            <!-- // 規格符號 Start // -->
             <tr class="ModifyHead">
                 <td>規格符號 (for 深圳)<em class="TableModifyTitleIcon"></em>
                 </td>

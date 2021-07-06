@@ -8,6 +8,13 @@
 <div id="abgne_float_Top" style="background-color: #efefef; text-align: center; padding-bottom: 5px;">
     <span class="abgne_close_Top">
         <img src="../images/delete2.png" width="11" height="11" alt="關閉快捷列" title="關閉快捷列" /></span>
+    <asp:Panel ID="ph_infoMsg" runat="server" Visible="false">
+        <strong>(<%=Lang %>)</strong>
+        <br />
+        <b style="color: darkred"><%=ModelNo %></b>
+        <hr />
+    </asp:Panel>
+
     <asp:Panel ID="pl_Save" runat="server" Style="padding: 2px 10px 5px 5px">
         <a class="Font12 styleReddark doSave" style="cursor: pointer">
             <img src="../images/save.png" width="32" alt="儲存" title="儲存" /><br />

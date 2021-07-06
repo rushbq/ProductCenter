@@ -63,12 +63,16 @@ public partial class Prod_MallPic : SecurityIn
                 cmd.Parameters.Clear();
 
                 //[SQL] - 資料查詢
-                StringBuilder SBSql = new StringBuilder();
-                SBSql.AppendLine(" SELECT Base.PMID, RTRIM(Base.Model_No) AS Model_No, Base.PicFile, Base.PicDesc, Base.Sort ");
-                SBSql.AppendLine(" FROM Prod_MallPic Base ");
-                SBSql.AppendLine(" WHERE (Base.Model_No = @Model_No) AND (LangCode = @LangCode) ");
-                SBSql.AppendLine(" ORDER BY Base.Sort ASC, Base.Create_Time DESC");
-                cmd.CommandText = SBSql.ToString();
+                string sql = @"
+                    SELECT Base.PMID, RTRIM(Base.Model_No) AS Model_No, Base.PicFile, Base.PicDesc, Base.Sort
+                     , Base.Create_Time, Base.Update_Time
+                     , ISNULL((SELECT Account_Name + ' (' + Display_Name + ')' FROM [PKSYS].dbo.User_Profile WHERE (Account_Name = Base.Create_Who)), '') AS Create_Name
+                     , ISNULL((SELECT Account_Name + ' (' + Display_Name + ')' FROM [PKSYS].dbo.User_Profile WHERE (Account_Name = Base.Update_Who)), '') AS Update_Name
+                    FROM Prod_MallPic Base
+                    WHERE (Base.Model_No = @Model_No) AND (UPPER(LangCode) = UPPER(@LangCode))
+                    ORDER BY Base.Sort ASC, Base.Create_Time DESC
+                    ";
+                cmd.CommandText = sql;
                 cmd.Parameters.AddWithValue("Model_No", Param_ModelNo);
                 cmd.Parameters.AddWithValue("LangCode", Param_InfoLang);
                 using (DataTable DT = dbConClass.LookupDT(cmd, out ErrMsg))

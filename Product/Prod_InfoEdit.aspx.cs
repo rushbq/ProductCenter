@@ -43,6 +43,8 @@ public partial class Prod_InfoEdit : SecurityIn
 
                 //[代入Ascx參數] - 主檔編號
                 Ascx_TabMenu1.Param_ModelNo = Param_ModelNo;
+                Ascx_ScrollIcon1.ModelNo = Param_ModelNo;
+                Ascx_ScrollIcon1.Lang = GetInfoValue("TabName", Param_InfoLang);
 
                 //[帶出資料]
                 LookupData();
@@ -432,34 +434,38 @@ public partial class Prod_InfoEdit : SecurityIn
     /// <param name="CheckType">來源類別</param>
     /// <param name="CheckLang">語言別</param>
     /// <returns></returns>
-    private string GetInfoValue(string CheckType, string CheckLang)
+    public string GetInfoValue(string CheckType, string CheckLang)
     {
         if (string.IsNullOrEmpty(CheckType) || string.IsNullOrEmpty(CheckLang))
         {
             return "";
         }
         //判斷語系
-        string AuthID, TabIndex;
+        string AuthID, TabIndex, TabName;
         switch (CheckLang.ToUpper())
         {
             case "ZH-CN":
                 AuthID = "123";
                 TabIndex = "4";
+                TabName = "簡中";
                 break;
 
             case "ZH-TW":
                 AuthID = "124";
                 TabIndex = "5";
+                TabName = "繁中";
                 break;
 
             case "EN-US":
                 AuthID = "125";
                 TabIndex = "6";
+                TabName = "英文";
                 break;
 
             default:
                 AuthID = "";
                 TabIndex = "";
+                TabName = "";
                 break;
         }
         //判斷來源
@@ -470,6 +476,9 @@ public partial class Prod_InfoEdit : SecurityIn
 
             case "TabIndex":
                 return TabIndex;
+
+            case "TabName":
+                return TabName;
 
             default:
                 return "";
